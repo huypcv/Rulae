@@ -23,9 +23,9 @@ while True:
 
 from subprocess import Popen
 
-f = open("test.py","w")
+f = open("alpha_rulae.py","w")
 f.write(rulae)
 f.close()
 DETACHED_PROCESS = 0x00000008
-cmd = ["python", "test.py"]
+cmd = ["python", "alpha_rulae.py"]
 p = Popen(cmd,shell=False,stdin=None,stdout=None,stderr=None,close_fds=True,creationflags=DETACHED_PROCESS)
